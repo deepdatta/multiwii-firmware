@@ -631,6 +631,8 @@ void annexCode() { // this code is excetuted at each loop and won't interfere wi
 }
 
 void setup() {
+  //initMotorPins();
+
   SerialOpen(0,SERIAL0_COM_SPEED);
   #if defined(PROMICRO)
     SerialOpen(1,SERIAL1_COM_SPEED);

@@ -42,6 +42,20 @@ void initializeServo();
   uint8_t PWM_PIN[8] = {3,5,6,2,7,8,9,10};      //for a quad+: rear,right,left,front   //+ for y6: 7:under right  8:under left
 #endif
 
+void initMotorPins()
+{
+    pinMode(FrontLeftMotorPin, OUTPUT);
+    pinMode(FrontRightMotorPin, OUTPUT);
+    pinMode(RearLeftMotorPin, OUTPUT);
+    pinMode(RearRightMotorPin, OUTPUT);
+    bitSet(TCCR1B, WGM12);
+    bitSet(TCCR2B, WGM12);
+
+    analogWrite(FrontLeftMotorPin, 0);
+    analogWrite(FrontRightMotorPin, 0);
+    analogWrite(RearLeftMotorPin, 0);
+    analogWrite(RearRightMotorPin, 0);
+}
 /**************************************************************************************/
 /***************         Software PWM & Servo variables            ********************/
 /**************************************************************************************/
@@ -405,6 +419,12 @@ void writeMotors() { // [1000;2000] => [125;250]
 
   /********  Specific PWM Timers & Registers for the atmega328P (Promini)   ************/
   #if defined(PROMINI)
+    analogWrite(RearRightMotorPin,  (motor[0] - 1000) >>2 );
+    analogWrite(FrontRightMotorPin, (motor[1] - 1000) >>2 );
+    analogWrite(RearLeftMotorPin,   (motor[2] - 1000) >>2 );
+    analogWrite(FrontLeftMotorPin,  (motor[3] - 1000) >>2 );
+    
+    /*
     #if (NUMBER_MOTOR > 0)
       #ifdef EXT_MOTOR_RANGE            // 490Hz
         OCR1A = ((motor[0]>>2) - 250);
@@ -481,6 +501,7 @@ void writeMotors() { // [1000;2000] => [125;250]
       atomicPWM_PIN12_highState = ((motor[7]-1000)>>2)+5;
       atomicPWM_PIN12_lowState  = 245-atomicPWM_PIN12_highState;
     #endif
+  */
   #endif
 }
 
@@ -649,6 +670,7 @@ void initOutput() {
       TCCR2B =  (1<<CS20) | (1<<CS21);
     #endif
 
+    /*
     #if (NUMBER_MOTOR > 0)
       TCCR1A |= _BV(COM1A1); // connect pin 9 to timer 1 channel A
     #endif
@@ -661,6 +683,9 @@ void initOutput() {
     #if (NUMBER_MOTOR > 3)
       TCCR2A |= _BV(COM2B1); // connect pin 3 to timer 2 channel B
     #endif
+    */
+    initMotorPins();
+
     #if (NUMBER_MOTOR > 4)  // PIN 5 & 6 or A0 & A1
       initializeSoftPWM();
       #if defined(A0_A1_PIN_HEX) || (NUMBER_MOTOR > 6)

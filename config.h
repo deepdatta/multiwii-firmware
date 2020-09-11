@@ -53,6 +53,10 @@
     //#define HELI_120_CCPM
     //#define HELI_90_DEG
 
+const int FrontLeftMotorPin  = 10;
+const int FrontRightMotorPin =  6;
+const int RearLeftMotorPin   =  9;
+const int RearRightMotorPin  =  5;
   /****************************    Motor minthrottle    *******************************/
     /* Set the minimum throttle command sent to the ESC (Electronic Speed Controller)
        This is the minimum value that allow motors to run at a idle speed  */
