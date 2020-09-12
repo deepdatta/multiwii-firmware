@@ -482,7 +482,7 @@ At this moment you can use this function only with WinGUI 2.3 release. MultiWiiC
 
   /* only enable any of this if you must change the default pin assignment, e.g. your board does not have a specific pin */
   /* you may need to change PINx and PORTx plus #shift according to the desired pin! */
-  //#define OVERRIDE_V_BATPIN                   A0 // instead of A3    // Analog PIN 3
+  #define OVERRIDE_V_BATPIN                   A2 // instead of A3    // Analog PIN 3
 
   //#define OVERRIDE_PSENSORPIN                 A1 // instead of A2    // Analog PIN 2
 
@@ -921,15 +921,15 @@ Also note, that maqgnetic declination changes with time, so recheck your value e
   /********************************************************************/
     /* for V BAT monitoring
        after the resistor divisor we should get [0V;5V]->[0;1023] on analog V_BATPIN
-       with R1=33k and R2=51k
+       with R1=33k and R2=56k
        vbat = [0;1023]*16/VBATSCALE
        must be associated with #define BUZZER ! */
-    //#define VBAT              // uncomment this line to activate the vbat code
-    #define VBATSCALE       131 // (*) (**) change this value if readed Battery voltage is different than real voltage
+    #define VBAT              // uncomment this line to activate the vbat code
+    #define VBATSCALE       122 // (*) (**) change this value if readed Battery voltage is different than real voltage
     #define VBATNOMINAL     126 // 12,6V full battery nominal voltage - only used for lcd.telemetry
-    #define VBATLEVEL_WARN1 107 // (*) (**) 10,7V
-    #define VBATLEVEL_WARN2  99 // (*) (**) 9.9V
-    #define VBATLEVEL_CRIT   93 // (*) (**) 9.3V - critical condition: if vbat ever goes below this value, permanent alarm is triggered
+    #define VBATLEVEL_WARN1  36 // (*) (**) 10,7V
+    #define VBATLEVEL_WARN2  35 // (*) (**) 9.9V
+    #define VBATLEVEL_CRIT   33 // (*) (**) 9.3V - critical condition: if vbat ever goes below this value, permanent alarm is triggered
     #define NO_VBAT          16 // Avoid beeping without any battery
     #define VBAT_OFFSET       0 // offset in 0.1Volts, gets added to voltage value  - useful for zener diodes
 
